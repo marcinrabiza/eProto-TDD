@@ -1,22 +1,37 @@
 package com.company;
 
+import java.util.HashMap;
+
 public class Student {
+
+    private int id;
+    private int currentSemester;
+    private HashMap<String, Grade> gradesFromCourses = new HashMap<>();
+
     public Student(boolean retakeAvailable, int id, int currentSemester) {
-        this.retakeAvailable = retakeAvailable;
         this.id = id;
         this.currentSemester = currentSemester;
     }
 
-    private boolean retakeAvailable;
-    private int id;
-    private int currentSemester;
 
-    public boolean isRetakeAvailable() {
-        return retakeAvailable;
+    public double getGrade(String courseName) {
+        return gradesFromCourses.get(courseName).getValue();
     }
 
-    public void setRetakeAvailable(boolean retakeAvailable) {
-        this.retakeAvailable = retakeAvailable;
+    public String getAllGrades() {
+        return gradesFromCourses.values().toString();
+    }
+
+    public int getECTSSum() {
+        int sum = 0;
+        for (Grade grade : gradesFromCourses.values()) {
+            sum += grade.getValue();
+        }
+        return sum;
+    }
+
+    public boolean isRetakeAvailable(String courseName) {
+        return gradesFromCourses.get(courseName).getValue() == 2.0;
     }
 
     public int getId() {
@@ -35,18 +50,17 @@ public class Student {
         this.currentSemester = currentSemester;
     }
 
-    public double getGrade(String przyrka) {
-        return 0;
+    public void setGrade(String courseName, double newValue) {
+        Grade grade = gradesFromCourses.get(courseName);
+        grade.setValue(newValue);
+        gradesFromCourses.replace(courseName, grade);
     }
 
-    public String getAllGrades() {
-        return "";
+    public HashMap<String, Grade> getGradesFromCourses() {
+        return gradesFromCourses;
     }
 
-    public int getECTSSum() {
-        return 0;
-    }
-
-    public void setGrade(String przyrka, double grade) {
+    public void setGradesFromCourses(HashMap<String, Grade> gradesFromCourses) {
+        this.gradesFromCourses = gradesFromCourses;
     }
 }
