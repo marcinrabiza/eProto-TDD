@@ -39,7 +39,10 @@ public class GradesSystemTest {
 
     @Test
     public void gradeStudentTest() {
-        //TODO
+        assertNotNull(student);
+        assertEquals(3.0, student.getGrade("przyrka"));
+        assertEquals(2.0, student.getGrade("matma"));
+        assertEquals(5.0, student.getGrade("infa"));
     }
 
     @Test
